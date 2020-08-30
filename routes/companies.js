@@ -6,7 +6,7 @@ const db = require("../db");
 router.get('/', async (req, res, next) => {
     try {
     const results = await db.query(`SELECT * FROM companies`);
-    return res.json({ users: results.rows })
+    return res.json({ companies: results.rows })
     } catch (e) {
     return next(e);
     }
@@ -43,7 +43,7 @@ router.put("/:code", async (req, res, next) => {
         if (results.rows.length === 0) {
             throw new ExpressError(`Can't update companies with code of ${code}`, 404)
         }
-        return res.status(201).json({company: results.rows[0]})
+        return res.status(200).json({company: results.rows[0]})
     } catch (e) {
         return next(e)
     }
